@@ -2,7 +2,6 @@ package at.study.redmine.model.project;
 
 import at.study.redmine.db.requests.ProjectRequests;
 import at.study.redmine.model.Createable;
-import at.study.redmine.model.members.Members;
 import at.study.redmine.model.role.Role;
 import at.study.redmine.model.user.CreatableEntity;
 import at.study.redmine.model.user.User;
@@ -18,12 +17,12 @@ import java.util.Random;
 @Getter
 @Setter
 public class Project extends CreatableEntity implements Createable<Project> {
-    private String name = "SAFProject_" + StringUtils.randomEnglishString(5);
-    private String description = "SAFDescription_" + StringUtils.randomEnglishString(5);
-    private String homePage = "http://edu-at.dfu.i-teco.ru/projects/" + "SAFHomePage" + StringUtils.randomEnglishString(5);
+    private String name = "SAF(Project)_" + StringUtils.randomEnglishString(5);
+    private String description = "SAF(Description)_" + StringUtils.randomEnglishString(11);
+    private String homePage = "http://edu-at.dfu.i-teco.ru/projects/" + "SAF(HomePage)" + StringUtils.randomEnglishString(5);
     private Boolean isPublic = true;
     private String parent_id = null;
-    private String identifier = "SAFIdentifier_" + StringUtils.randomEnglishString(5);
+    private String identifier = "SAF(Identifier)_" + StringUtils.randomEnglishString(5);
     private Integer status = 1;
     private Integer lft = new Random().nextInt(25) + 1;
     private Integer rgt = new Random().nextInt(25) + 1;
@@ -43,14 +42,21 @@ public class Project extends CreatableEntity implements Createable<Project> {
      * @param user
      * @param role
      */
-    public int addUserAndProjectToMembers(User user, Project project) {
-        return new ProjectRequests().create(user,project);
+    // public int addUserAndProjectToMembers(User user, Project project) {
+    //     return new ProjectRequests().create(user,project);
+    // }
+//
+    // public void addMembersAndRolestoMemberRoles(int memberId, Role role){
+    //     new ProjectRequests().create(memberId,role);
+    // }
+   //// public void addUserWithRoleToProject(User user, Project project, Role role) {
+   ////     int memberId = new ProjectRequests().create(user, project);
+   ////     new ProjectRequests().create(memberId, role);
+   //// }
+
+    public  void  addUserWithListRoletiProject(User user, Project project, List<Role> roles){
+        int memberId = new ProjectRequests().create(user, project);
+        new ProjectRequests().create(memberId, roles);
     }
-
-    public void addMembersAndRolestoMemberRoles(int memberId, Role role){
-        new ProjectRequests().create(memberId,role);
-    }
-
-
 
 }

@@ -1,6 +1,7 @@
 package at.study.redmine.db.connection;
 
 import lombok.SneakyThrows;
+import org.postgresql.util.PSQLException;
 
 import java.sql.*;
 import java.util.*;
@@ -61,8 +62,8 @@ public class PostgresConnection implements DatabaseConnection {
             resultList.add(resultRow);
         }
         return resultList;
-       } catch (org.postgresql.util.PSQLException exc) {
-           if (exc.getMessage().equals(": Запрос не вернул результатов.")) {
+       } catch (PSQLException exc) {
+           if (exc.getMessage().equals("Запрос не вернул результатов.")) {
                return null;
            } else throw exc;
        }
