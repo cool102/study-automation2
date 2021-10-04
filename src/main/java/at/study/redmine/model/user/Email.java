@@ -3,6 +3,7 @@ package at.study.redmine.model.user;
 import at.study.redmine.db.requests.EmailRequests;
 import at.study.redmine.model.Createable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -11,6 +12,7 @@ import static at.study.redmine.utils.StringUtils.randomEmail;
 @Getter
 @Setter
 @Accessors(chain = true)
+@NoArgsConstructor
 public class Email extends CreatableEntity implements Createable<Email> {
 
     private Integer userId;

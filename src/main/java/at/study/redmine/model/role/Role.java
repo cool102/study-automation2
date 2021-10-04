@@ -16,7 +16,7 @@ import java.util.Random;
 @Getter
 @Setter
 public class Role extends Entity implements Createable<Role> {
-    private String name = "SAF(Role)_" + StringUtils.randomEnglishString(5);
+    private String name = "saf_Role_" + StringUtils.randomEnglishString(5);
     private Integer position = new Random().nextInt(25) + 1;
     private Boolean assignable = true;
     private Integer builtin = 0;

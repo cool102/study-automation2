@@ -1,6 +1,7 @@
 package at.study.redmine.db.requests;
 
 import at.study.redmine.db.connection.PostgresConnection;
+import at.study.redmine.model.user.Status;
 import at.study.redmine.model.user.User;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
-public class UserRequests implements Create<User>, Update<User>, Delete {
+public class UserRequests implements Create<User>, Read<User>, Update<User>, Delete {
 
     @Override
     public void create(User user) {
@@ -87,4 +88,42 @@ public class UserRequests implements Create<User>, Update<User>, Delete {
         user.setId(id);
 
     }
+
+    @Override
+    public User read(Integer id) {
+        String query = "SELECT * FROM users WHERE id=?";
+
+        List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
+                query,
+                id
+        );
+
+        User returnUser = new User();
+        try {
+            returnUser.setId((Integer) result.get(0).get("id"));
+            returnUser.setLogin((String) result.get(0).get("login"));
+            returnUser.setFisrtName((String) result.get(0).get("firstname"));
+            returnUser.setLastName((String) result.get(0).get("lastname"));
+        }
+        catch (IndexOutOfBoundsException exception){
+            throw new RuntimeException("указанного пользователя не найдено");
+        }
+        int tempStatus = (Integer) result.get(0).get("status");
+        switch (tempStatus) {
+            case (1):
+                returnUser.setStatus(Status.ACTIVE);
+                break;
+            case (2):
+                returnUser.setStatus(Status.UNACCEPTED);
+                break;
+            case (3):
+                returnUser.setStatus(Status.LOCKED);
+                break;
+
+        }
+
+return returnUser;
+    }
+
+
 }

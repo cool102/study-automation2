@@ -17,12 +17,12 @@ import java.util.Random;
 @Getter
 @Setter
 public class Project extends CreatableEntity implements Createable<Project> {
-    private String name = "SAF(Project)_" + StringUtils.randomEnglishString(5);
-    private String description = "SAF(Description)_" + StringUtils.randomEnglishString(11);
-    private String homePage = "http://edu-at.dfu.i-teco.ru/projects/" + "SAF(HomePage)" + StringUtils.randomEnglishString(5);
+    private String name = "saf_Project_AF0_" + StringUtils.randomEnglishString(5);
+    private String description = "saf_Description_" + StringUtils.randomEnglishString(11);
+    private String homePage = "http://edu-at.dfu.i-teco.ru/projects/" + "saf(HomePage)" + StringUtils.randomEnglishString(5);
     private Boolean isPublic = true;
     private String parent_id = null;
-    private String identifier = "SAF(Identifier)_" + StringUtils.randomEnglishString(5);
+    private String identifier = "saf_Identifier_" + StringUtils.randomEnglishString(5);
     private Integer status = 1;
     private Integer lft = new Random().nextInt(25) + 1;
     private Integer rgt = new Random().nextInt(25) + 1;
