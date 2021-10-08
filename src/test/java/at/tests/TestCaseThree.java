@@ -8,7 +8,6 @@ import at.study.redmine.api.dto.users.UserDto;
 import at.study.redmine.api.dto.users.UserInfoDto;
 import at.study.redmine.api.rest_assured.RestAssuredClient;
 import at.study.redmine.api.rest_assured.RestAssuredRequest;
-import at.study.redmine.api.rest_assured.RestAssuredResponse;
 import at.study.redmine.model.user.Email;
 import at.study.redmine.model.user.Token;
 import at.study.redmine.model.user.User;
@@ -17,17 +16,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import static at.study.redmine.api.rest_assured.GsonProvider.GSON;
 
 /**
  * Получение пользователей. Пользователь без прав администратора
  */
 public class TestCaseThree {
-    User userOne;
-    User userTwo;
+   private User userOne;
+   private User userTwo;
 
     @BeforeMethod
     public void prepareFixtures() {
@@ -87,14 +82,12 @@ public class TestCaseThree {
 
     private void test3point2(RestApiClient client, RestRequest requestTwo) {
         RestResponse response = client.execute(requestTwo);
-      Assert.assertEquals(response.getStatusCode(),200);
-      Assert.assertFalse(response.getPayLoad().contains("admin"));
-      Assert.assertFalse(response.getPayLoad().contains("api_key"));
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertFalse(response.getPayLoad().contains("admin"));
+        Assert.assertFalse(response.getPayLoad().contains("api_key"));
 
 
     }
-
-
 
 
 }
