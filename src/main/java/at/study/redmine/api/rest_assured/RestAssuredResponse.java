@@ -1,7 +1,6 @@
 package at.study.redmine.api.rest_assured;
 
 import at.study.redmine.api.client.RestResponse;
-import com.google.gson.Gson;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import lombok.Getter;
@@ -21,7 +20,7 @@ public class RestAssuredResponse implements RestResponse {
     public RestAssuredResponse(Response response) {
         this.statusCode = response.getStatusCode();
         this.headers = response.getHeaders().asList() //List<Headers> -> Map<String,String>
-        .stream().collect(Collectors.toMap(Header::getName,Header::getValue));
+                .stream().collect(Collectors.toMap(Header::getName, Header::getValue));
         this.payload = response.getBody().asString();
     }
 
@@ -31,8 +30,7 @@ public class RestAssuredResponse implements RestResponse {
     }
 
     @Override
-    public <T> T getPayload(Class<T> clazz)
-    {
+    public <T> T getPayload(Class<T> clazz) {
 
         return GSON.fromJson(payload, clazz);
     }
