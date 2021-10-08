@@ -37,7 +37,6 @@ public class TestCaseTwo {
             setTokens(Collections.singletonList(new Token(this)));
             setEmails(Collections.singletonList(new Email(this)));
         }}.create();
-
     }
 
     @Test
