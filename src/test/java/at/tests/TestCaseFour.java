@@ -19,8 +19,8 @@ import java.util.Map;
  * Удаление пользователей. Пользователь без прав администратора
  */
 public class TestCaseFour {
-   private User noAdminUser; //TODO
-   private User user;
+    private User noAdminUser;
+    private User user;
 
 
     @BeforeMethod
@@ -64,9 +64,9 @@ public class TestCaseFour {
         Assert.assertEquals(resultTwo.get(0).get("id"), noAdminUserId);
     }
 
-    private void test4point1(int userId, String urlOne, String query,  RestAssuredClient client) {
+    private void test4point1(int userId, String urlOne, String query, RestAssuredClient client) {
         RestAssuredRequest requestOne = new RestAssuredRequest(RestMethod.DELETE,
-                urlOne,null, null,null);
+                urlOne, null, null, null);
         RestResponse responseOne = client.execute(requestOne);
         Assert.assertEquals(responseOne.getStatusCode(), 403);
 
