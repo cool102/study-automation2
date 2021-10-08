@@ -23,12 +23,12 @@ import static at.study.redmine.api.rest_assured.GsonProvider.GSON;
  * Создание пользователя. Пользователь без прав администратора
  */
 public class TestCaseTwo {
-    User userOne;
-    UserInfoDto body;
-    RestApiClient client;
-    RestRequest request;
+   private User userOne;
+   private UserInfoDto body;
+   private RestApiClient client;
+   private RestRequest request;
 
-    String bodyAsString;
+   private String bodyAsString;
 
     @BeforeMethod
     public void prepareFixtures() {
