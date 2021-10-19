@@ -13,9 +13,9 @@ import static at.study.redmine.api.rest_assured.GsonProvider.GSON;
 @Getter
 public class RestAssuredResponse implements RestResponse {
 
-    private int statusCode;
-    private Map<String, String> headers;
-    private String payload;
+    private final int statusCode;
+    private final Map<String, String> headers;
+    private final String payload;
 
     public RestAssuredResponse(Response response) {
         this.statusCode = response.getStatusCode();

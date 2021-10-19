@@ -1,5 +1,5 @@
 package at.study.redmine.api.client;
 
 public interface RestApiClient {
-    RestResponse execute (RestRequest request);
+    RestResponse execute(RestRequest request);
 }

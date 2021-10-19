@@ -58,22 +58,23 @@ public class User extends CreatableEntity implements Createable<User> {
         emails.forEach(Email::create);
         return this;
     }
-    public void delete(){
+
+    public void delete() {
         new UserRequests().delete(this.id);
     }
 
-    public void update(){
-        new UserRequests().update(this.id,this);
+    public void update() {
+        new UserRequests().update(this.id, this);
     }
+
     public void addProject(Project project, List<Role> roles) {
         //TODO: реализовать с помощью SQL-запроса
     }
 
-    public User read(Integer id){
+    public User read(Integer id) {
         return new UserRequests().read(id);
 
     }
-
 
 
 }

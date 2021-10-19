@@ -1,7 +1,5 @@
 package at.study.redmine.api.client;
 
-import lombok.Getter;
-
 import java.util.Map;
 
 /**

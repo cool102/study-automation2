@@ -1,18 +1,16 @@
 package at.study.redmine.db.requests;
 
 import at.study.redmine.db.connection.PostgresConnection;
-import at.study.redmine.model.Createable;
 import at.study.redmine.model.project.Project;
 import at.study.redmine.model.role.Role;
 import at.study.redmine.model.user.User;
-import org.postgresql.util.PSQLException;
 
 import java.util.List;
 import java.util.Map;
 
 public class ProjectRequests implements Create<Project> {
 
-    public int create(User user, Project project){
+    public int create(User user, Project project) {
         String query = "INSERT INTO members" +
                 " (id, user_id, project_id, created_on, mail_notification)" +
                 " VALUES(DEFAULT, ?, ?, ?, ?) RETURNING id;\n";
@@ -26,22 +24,22 @@ public class ProjectRequests implements Create<Project> {
         return (Integer) result.get(0).get("id");
     }
 
-    public void create (int memberId, List<Role> roles){
+    public void create(int memberId, List<Role> roles) {
         int length = roles.size();
 
         String query = "INSERT INTO member_roles " +
                 "(id, member_id, role_id, inherited_from) " +
                 "VALUES(DEFAULT, ?, ?, ?);\n";
 
-            for (int i = 0; i < length; i++) {
-                List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
-                        query,
-                        memberId,
-                        roles.get(i).getId(),
-                        null
-                );
+        for (int i = 0; i < length; i++) {
+            List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
+                    query,
+                    memberId,
+                    roles.get(i).getId(),
+                    null
+            );
 
-            }
+        }
 
     }
 
@@ -77,5 +75,5 @@ public class ProjectRequests implements Create<Project> {
         Integer projectId = (Integer) result.get(0).get("id");
         project.setId(projectId);
     }
-    }
+}
 

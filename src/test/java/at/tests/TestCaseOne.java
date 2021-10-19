@@ -48,7 +48,7 @@ public class TestCaseOne {
 
     }
 
-    @Test
+    @Test (description = "Создание, изменение, получение, удаление пользователя. Администратор системы")
     public void TestCase1() {
 
         createdUser = new User() {{

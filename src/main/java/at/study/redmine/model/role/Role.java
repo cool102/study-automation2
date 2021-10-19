@@ -4,12 +4,10 @@ import at.study.redmine.db.requests.RoleRequests;
 import at.study.redmine.model.Createable;
 import at.study.redmine.model.user.Entity;
 import at.study.redmine.utils.StringUtils;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Random;
 
 @NoArgsConstructor

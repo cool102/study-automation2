@@ -49,12 +49,11 @@ public class Project extends CreatableEntity implements Createable<Project> {
     // public void addMembersAndRolestoMemberRoles(int memberId, Role role){
     //     new ProjectRequests().create(memberId,role);
     // }
-   //// public void addUserWithRoleToProject(User user, Project project, Role role) {
-   ////     int memberId = new ProjectRequests().create(user, project);
-   ////     new ProjectRequests().create(memberId, role);
-   //// }
-
-    public  void  addUserWithListRoletiProject(User user, Project project, List<Role> roles){
+    //// public void addUserWithRoleToProject(User user, Project project, Role role) {
+    ////     int memberId = new ProjectRequests().create(user, project);
+    ////     new ProjectRequests().create(memberId, role);
+    //// }
+    public void addUserWithListRoletiProject(User user, Project project, List<Role> roles) {
         int memberId = new ProjectRequests().create(user, project);
         new ProjectRequests().create(memberId, roles);
     }

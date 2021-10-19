@@ -70,10 +70,10 @@ public enum Permissions {
     PROTECT_WIKI_PAGES(""),
     MANAGE_WIKI("");
 
+    private final String description;
+
     Permissions(String description) {
         this.description = description;
     }
-
-    private String description;
 }
 

@@ -1,7 +1,6 @@
 package at.study.redmine.db.requests;
 
 import at.study.redmine.db.connection.PostgresConnection;
-import at.study.redmine.model.role.Permissions;
 import at.study.redmine.model.role.Role;
 
 import java.util.List;
@@ -11,11 +10,11 @@ public class RoleRequests implements Create<Role> {
 
     @Override
     public void create(Role role) {
-     String query = "INSERT INTO roles (id, \"name\", \"position\"," +
-             " assignable, builtin, permissions, issues_visibility," +
-             " users_visibility, time_entries_visibility," +
-             " all_roles_managed, settings)" +
-             " VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;\n";
+        String query = "INSERT INTO roles (id, \"name\", \"position\"," +
+                " assignable, builtin, permissions, issues_visibility," +
+                " users_visibility, time_entries_visibility," +
+                " all_roles_managed, settings)" +
+                " VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;\n";
 
         List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
                 query,
@@ -32,8 +31,6 @@ public class RoleRequests implements Create<Role> {
         );
         Integer roleId = (Integer) result.get(0).get("id");
         role.setId(roleId);
-
-
 
 
     }

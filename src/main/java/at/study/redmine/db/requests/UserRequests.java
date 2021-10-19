@@ -104,8 +104,7 @@ public class UserRequests implements Create<User>, Read<User>, Update<User>, Del
             returnUser.setLogin((String) result.get(0).get("login"));
             returnUser.setFisrtName((String) result.get(0).get("firstname"));
             returnUser.setLastName((String) result.get(0).get("lastname"));
-        }
-        catch (IndexOutOfBoundsException exception){
+        } catch (IndexOutOfBoundsException exception) {
             throw new RuntimeException("указанного пользователя не найдено");
         }
         int tempStatus = (Integer) result.get(0).get("status");
@@ -122,7 +121,7 @@ public class UserRequests implements Create<User>, Read<User>, Update<User>, Del
 
         }
 
-return returnUser;
+        return returnUser;
     }
 
 

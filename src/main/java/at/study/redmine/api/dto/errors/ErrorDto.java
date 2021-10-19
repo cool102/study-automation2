@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 import java.util.List;
+
 @Data
 @Setter
 @Getter

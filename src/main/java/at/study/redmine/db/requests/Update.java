@@ -9,7 +9,7 @@ import at.study.redmine.model.user.Entity;
  * Будем передавать 2 параметра
  * Id и сущность которую нужно обновить.
  */
-public interface Update <T extends Entity>{
+public interface Update<T extends Entity> {
 
     void update(Integer id, T entity);
 }

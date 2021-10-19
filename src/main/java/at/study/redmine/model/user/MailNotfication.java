@@ -2,6 +2,8 @@ package at.study.redmine.model.user;
 
 import lombok.AllArgsConstructor;
 
+import java.util.stream.Stream;
+
 @AllArgsConstructor
 public enum MailNotfication {
     ALL("О всех событиях во всех моих проектах"),
@@ -12,5 +14,13 @@ public enum MailNotfication {
 
     private final String descrpiton;
 
+    public static MailNotfication of(String descrpiton) {
+
+        return Stream.of(values())
+                .filter(mailNotfication -> mailNotfication.descrpiton.equals(descrpiton))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Не найдем объект enum MailNotification"));
+
+    }
 
 }

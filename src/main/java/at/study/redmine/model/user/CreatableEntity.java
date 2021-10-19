@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CreatableEntity extends Entity{
+public class CreatableEntity extends Entity {
     protected LocalDateTime createdOn = LocalDateTime.now();
     protected LocalDateTime updatedOn = LocalDateTime.now();
 

@@ -11,13 +11,13 @@ import java.util.Map;
 @Getter
 public class RestAssuredRequest implements RestRequest {
     @NonNull
-    private RestMethod method;
+    private final RestMethod method;
     @NonNull
-    private String uri;
+    private final String uri;
 
     private Map<String, String> headers = new HashMap<>();
     private Map<String, String> queryParameters = new HashMap<>();
-    private String body;
+    private final String body;
 
     public RestAssuredRequest(RestMethod method, String uri, Map<String, String> headers, Map<String, String> queryParameters, String body) {
         this.method = method;

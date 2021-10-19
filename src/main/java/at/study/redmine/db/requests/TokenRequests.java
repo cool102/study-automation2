@@ -30,19 +30,19 @@ public class TokenRequests implements Create<Token>, ReadAll<Token> {
 
     @Override
     public void create(Token token) {
-     String query = "INSERT INTO public.tokens\n" +
-             "(id, user_id, \"action\", value, created_on, updated_on)\n" +
-             "VALUES(DEFAULT, ?,?,?,?,?) RETURNING id;\n";
-     List<Map<String, Object>> queryResult= PostgresConnection.INSTANCE.executeQuery(
-             query,
-             token.getUserId(),
-             token.getAction().name().toLowerCase(),
-             token.getValue(),
-             token.getCreatedOn(),
-             token.getUpdatedOn()
-     );
-     Integer tokenId= (Integer) queryResult.get(0).get("id");
-     token.setId(tokenId);
+        String query = "INSERT INTO public.tokens\n" +
+                "(id, user_id, \"action\", value, created_on, updated_on)\n" +
+                "VALUES(DEFAULT, ?,?,?,?,?) RETURNING id;\n";
+        List<Map<String, Object>> queryResult = PostgresConnection.INSTANCE.executeQuery(
+                query,
+                token.getUserId(),
+                token.getAction().name().toLowerCase(),
+                token.getValue(),
+                token.getCreatedOn(),
+                token.getUpdatedOn()
+        );
+        Integer tokenId = (Integer) queryResult.get(0).get("id");
+        token.setId(tokenId);
     }
 
     @Override

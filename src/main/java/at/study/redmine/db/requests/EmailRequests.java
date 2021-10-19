@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailRequests implements Create<Email> {
@@ -16,9 +17,9 @@ public class EmailRequests implements Create<Email> {
     @Override
     public void create(Email email) {
         String query = "INSERT INTO email_addresses\n" +
-        "(id, user_id, address, is_default, \"notify\", created_on, updated_on)\n"+
+                "(id, user_id, address, is_default, \"notify\", created_on, updated_on)\n" +
                 "VALUES(DEFAULT, ?, ?, ?, ?, ?, ?) RETURNING id;\n";
-        List<Map<String,Object>> result = PostgresConnection.INSTANCE.executeQuery(
+        List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
                 query,
                 email.getUserId(),
                 email.getAddress(),
