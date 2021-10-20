@@ -1,15 +1,10 @@
 package at.tests.ui;
 
 import at.study.redmine.model.user.User;
-import lombok.SneakyThrows;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.testng.Assert.*;
-import static org.testng.Assert.assertEquals;
 
 public class ActiveUserLogin extends BaseUITest {
     User user;
@@ -33,7 +28,7 @@ public class ActiveUserLogin extends BaseUITest {
         assertEquals(headerPage.homePage.getText(), "Домашняя страница");
         assertEquals(headerPage.loggedAs.getText(), "Вошли как " + user.getLogin());
         assertEquals(headerPage.myAccount.getText(), "Моя учётная запись");
-        assertEquals(headerPage.homePage.getText(),"Домашняя страница");
+        assertEquals(headerPage.homePage.getText(), "Домашняя страница");
         assertTrue(headerPage.homePage.isDisplayed());
         assertTrue(headerPage.myPage.isDisplayed());
         assertTrue(headerPage.projects.isDisplayed());
@@ -41,11 +36,11 @@ public class ActiveUserLogin extends BaseUITest {
         assertTrue(headerPage.myAccount.isDisplayed());
         assertTrue(headerPage.logOut.isDisplayed());
 
-       assertFalse(headerPage.administration.isDisplayed());
-       assertFalse(headerPage.loginButton.isDisplayed());
-       assertFalse(headerPage.register.isDisplayed());
+        assertFalse(headerPage.administration.isDisplayed());
+        assertFalse(headerPage.loginButton.isDisplayed());
+        assertFalse(headerPage.register.isDisplayed());
 
-       assertTrue(headerPage.findToolBar.isDisplayed());
+        assertTrue(headerPage.findToolBar.isDisplayed());
 
 
     }
