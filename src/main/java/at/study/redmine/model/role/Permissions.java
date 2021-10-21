@@ -25,7 +25,7 @@ public enum Permissions {
     VIEW_FILES(""),
     MANAGE_FILES(""),
     VIEW_GANTT(""),
-    VIEW_ISSUES(""),
+    VIEW_ISSUES("Просмотр задач"),
     ADD_ISSUES(""),
     EDIT_ISSUES(""),
     EDIT_OWN_ISSUES(""),

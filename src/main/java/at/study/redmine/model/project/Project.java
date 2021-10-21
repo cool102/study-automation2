@@ -17,7 +17,7 @@ import java.util.Random;
 @Getter
 @Setter
 public class Project extends CreatableEntity implements Createable<Project> {
-    private String name = "saf_Project_AF0_" + StringUtils.randomEnglishString(5);
+    private String name = "saf_Project_" + StringUtils.randomEnglishString(2);
     private String description = "saf_Description_" + StringUtils.randomEnglishString(11);
     private String homePage = "http://edu-at.dfu.i-teco.ru/projects/" + "saf(HomePage)" + StringUtils.randomEnglishString(5);
     private Boolean isPublic = true;

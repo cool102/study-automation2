@@ -25,12 +25,12 @@ import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 @Accessors(chain = true)
 public class User extends CreatableEntity implements Createable<User> {
 
-    private String login = "saf_login_" + randomEnglishString(10);
+    private String login = "saf_login_" + randomEnglishString(3);
     private String password = "1qaz@WSX";
     private String salt = randomHexString(32);
     private String hashedPassword = getHashedPassword();
-    private String fisrtName = "saf_JeanPhilippe_" + randomEnglishString(10);
-    private String lastName = "saf_LastName_" + randomEnglishString(10);
+    private String fisrtName = "saf_JeanPhilippe_" + randomEnglishString(4);
+    private String lastName = "saf_LastName_" + randomEnglishString(4);
     private Boolean isAdmin = false;
     private Status status = Status.ACTIVE;
     private LocalDateTime lastLoginOn;
