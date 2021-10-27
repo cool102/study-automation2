@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class UsersTableFirstAndLastNameSortTest extends BaseUITest{
+public class UsersTableFirstAndLastNameSortTest extends BaseUITest {
     User admin;
 
     @BeforeMethod
-    public void prepareFixture(){
+    public void prepareFixture() {
         admin = new User() {{
             setIsAdmin(true);
         }}.create();
@@ -36,7 +36,7 @@ public class UsersTableFirstAndLastNameSortTest extends BaseUITest{
     }
 
     @Test
-    public void usersTableFirstAndLastNameSortTest(){
+    public void usersTableFirstAndLastNameSortTest() {
         openBrowser();
         headerPage.loginButton.click();
         loginPage.login(admin);
@@ -82,8 +82,6 @@ public class UsersTableFirstAndLastNameSortTest extends BaseUITest{
 
         List<String> firstNameText5 = BrowserUtils.getElementsText(usersTablePage.firstName);
         CompareUtils.assertEqualsListSortedByTextDesc(firstNameText5);
-
-
 
 
     }

@@ -14,6 +14,7 @@ public class BaseUITest {
     protected AdministrationPage administrationPage;
     protected UsersTablePage usersTablePage;
 
+    protected NewUserCreationPage newUserCreationPage;
 
 
     protected void openBrowser() {
@@ -23,6 +24,7 @@ public class BaseUITest {
         projectPage = Page.getPage(ProjectPage.class);
         administrationPage = Page.getPage(AdministrationPage.class);
         usersTablePage = Page.getPage(UsersTablePage.class);
+        newUserCreationPage= Page.getPage(NewUserCreationPage.class);
     }
 
     @AfterMethod

@@ -49,7 +49,7 @@ public class ProjectVisibilityAdminTest extends BaseUITest {
     @Test
     public void projectVisibilityAdmin() {
 
-        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/"+ projectIdentifyer + "']"));
+        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/" + projectIdentifyer + "']"));
         Assert.assertTrue(projectElement.isDisplayed());
     }
 }
