@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ProjectVisibilityAdmin extends BaseUITest {
+public class ProjectVisibilityAdminTest extends BaseUITest {
     User user;
     WebElement projectElement;
 

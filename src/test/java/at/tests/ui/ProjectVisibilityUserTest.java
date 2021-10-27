@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectVisibilityUser extends BaseUITest {
+public class ProjectVisibilityUserTest extends BaseUITest {
     User user;
     Role issuesWatcherRole;
 
@@ -63,7 +63,6 @@ public class ProjectVisibilityUser extends BaseUITest {
         loginPage.login(user);
         headerPage.projects.click();
 
-        //проверки
 
         Assert.assertTrue(headerPage.homePage.isDisplayed());
         Assert.assertTrue(projectPage.projectsContent.isDisplayed());
