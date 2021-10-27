@@ -51,11 +51,11 @@ public class UsersTableLoginSortingTest extends BaseUITest {
         Assert.assertTrue(usersTablePage.button("Создано").isDisplayed());
 
         List<String> loginsBeforeClick = BrowserUtils.getElementsText(usersTablePage.login);
-        CompareUtils.assertListSortedByLoginAsc(loginsBeforeClick);
+        CompareUtils.assertEqualsListSortedByTextAsc(loginsBeforeClick);
 
         usersTablePage.button("Пользователь").click();
         List<String> loginsTextAfterClick = BrowserUtils.getElementsText(usersTablePage.login);
-        CompareUtils.assertListSortedByLoginDesc(loginsTextAfterClick);
+        CompareUtils.assertEqualsListSortedByTextDesc(loginsTextAfterClick);
 
 
     }

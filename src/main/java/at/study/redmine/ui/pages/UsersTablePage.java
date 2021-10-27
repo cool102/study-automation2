@@ -16,6 +16,12 @@ public class UsersTablePage extends Page {
     @FindBy (xpath = "//table[@class='list users']/tbody//td[@class='username']/a")
     public List<WebElement> login;
 
+    @FindBy(xpath = "//table[@class='list users']/tbody//td[@class='lastname']")
+    public  List<WebElement> lastName;
+
+    @FindBy(xpath = "//table[@class='list users']/tbody//td[@class='firstname']")
+    public  List<WebElement> firstName;
+
     public WebElement button(String text) {
         return BrowserManager.getBrowser().getDriver().findElement(By.xpath(
                 "//table[@class='list users']/thead//th[.='" + text + "']"));

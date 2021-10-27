@@ -19,8 +19,8 @@ public class CompareUtils {
         LocalDateTime d2 = LocalDateTime.parse(s2, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
         return d2.compareTo(d1);
     };
-    private static Comparator<String> LOGIN_DECS_COMPARATOR = (l1, l2) -> l2.toLowerCase().compareTo(l1.toLowerCase());
-    private static Comparator<String> LOGIN_ACS_COMPARATOR = LOGIN_DECS_COMPARATOR.reversed();
+    private static Comparator<String> TEXT_DECS_COMPARATOR = (l1, l2) -> l2.toLowerCase().compareTo(l1.toLowerCase());
+    private static Comparator<String> TEXT_ASC_COMPARATOR = TEXT_DECS_COMPARATOR.reversed();
 
     public static void assertListSortedByDateDesc(List<String> dates) {
 
@@ -30,15 +30,22 @@ public class CompareUtils {
 
     }
 
-    public static void assertListSortedByLoginDesc(List<String> logins) {
+    public static void assertEqualsListSortedByTextDesc(List<String> logins) {
         List<String> sortedLogins = new ArrayList<>(logins);
-        sortedLogins.sort(LOGIN_DECS_COMPARATOR);
+        sortedLogins.sort(TEXT_DECS_COMPARATOR);
         Assert.assertEquals(logins, sortedLogins);
     }
-    public static void assertListSortedByLoginAsc(List<String> logins) {
-        List<String> sortedLogins = new ArrayList<>(logins);
-        sortedLogins.sort(LOGIN_ACS_COMPARATOR);
-        Assert.assertEquals(logins, sortedLogins);
+    public static void assertEqualsListSortedByTextAsc(List<String> text) {
+        List<String> sortedText = new ArrayList<>(text);
+        sortedText.sort(TEXT_ASC_COMPARATOR);
+        Assert.assertEquals(text, sortedText);
+    }
+
+    public static void assertFalseListSortedByTextAsc(List<String> text){
+        List<String> sortedText = new ArrayList<>(text);
+        sortedText.sort(TEXT_ASC_COMPARATOR);
+        Assert.assertFalse(text.equals(sortedText));
+
     }
 
 
