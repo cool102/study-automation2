@@ -1,5 +1,6 @@
 package at.tests.ui;
 
+import at.study.redmine.model.project.Project;
 import at.study.redmine.model.user.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,12 +12,19 @@ public class ProjectVisibilityAdminTest extends BaseUITest {
     User user;
     WebElement projectElement;
 
+    Project project;
+    String projectIdentifyer;
+
     @BeforeMethod
     public void prepareFixture() {
         user = new User() {{
             setIsAdmin(true);
         }}.create();
 
+        project = new Project() {{
+            setIsPublic(false);
+        }}.create();
+        projectIdentifyer = project.getIdentifier();
 
         openBrowser();
         headerPage.loginButton.click();
@@ -40,7 +48,8 @@ public class ProjectVisibilityAdminTest extends BaseUITest {
 
     @Test
     public void projectVisibilityAdmin() {
-        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/saf_Identifier_eaxtb']"));
+
+        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/"+ projectIdentifyer + "']"));
         Assert.assertTrue(projectElement.isDisplayed());
     }
 }
