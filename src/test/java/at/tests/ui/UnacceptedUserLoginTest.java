@@ -2,6 +2,9 @@ package at.tests.ui;
 
 import at.study.redmine.model.user.Status;
 import at.study.redmine.model.user.User;
+import at.study.redmine.ui.BrowserUtils;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Owner;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,18 +20,33 @@ public class UnacceptedUserLoginTest extends BaseUITest {
         }}.create();
 
         openBrowser();
-        headerPage.loginButton.click();
+        Allure.step("Кликнул кнопку \"Войти\"", () -> {
+            headerPage.loginButton.click();
+        });
         loginPage.login(user);
 
     }
 
-    @Test(expectedExceptions = org.openqa.selenium.NoSuchElementException.class)
+    @Test(description = "Авторизация неподтвержденным пользователем")
+    @Owner("Саляхов Алмаз Фанилович")
     public void unacceptedUserLogin() {
-        Assert.assertTrue(headerPage.homePage.isDisplayed());
-        Assert.assertEquals(loginPage.flashError.getText(), "Ваша учётная запись создана и ожидает подтверждения администратора.");
-        Assert.assertFalse(headerPage.myPage.isDisplayed());
-        Assert.assertTrue(headerPage.loginButton.isDisplayed());
-        Assert.assertTrue(headerPage.register.isDisplayed());
+        Allure.step("Проверка, что отображается элемент \"Домашняя страница\"", () -> {
+            Assert.assertTrue(headerPage.homePage.isDisplayed());
+        });
+        Allure.step("Проверка равенства текстовок баннера об ошибке", () -> {
+            Assert.assertEquals(loginPage.flashError.getText(), "Ваша учётная запись создана и ожидает подтверждения администратора.");
+        });
+        Allure.step("Проверка, что элемент \"Моя страница\" не отображается", () -> {
+                    Assert.assertFalse(BrowserUtils.isElementCurrentlyDisplayed(headerPage.myPage));
+                }
+        );
+        Allure.step("Проверка, что элемент \"Войти\" отображается", () -> {
+            Assert.assertTrue(headerPage.loginButton.isDisplayed());
+        });
+        Allure.step("Проверка, что элемент \"Регистрация\" отображается", () -> {
+            Assert.assertTrue(headerPage.register.isDisplayed());
+        });
+
 
     }
 

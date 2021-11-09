@@ -2,6 +2,7 @@ package at.study.redmine.model.user;
 
 import at.study.redmine.db.requests.TokenRequests;
 import at.study.redmine.model.Createable;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -21,6 +22,7 @@ public class Token extends CreatableEntity implements Createable<Token> {
     }
 
     @Override
+    @Step("Создан токен в БД")
     public Token create() {
         new TokenRequests().create(this);
         return this;

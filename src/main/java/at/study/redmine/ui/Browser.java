@@ -1,6 +1,8 @@
 package at.study.redmine.ui;
 
 import at.study.redmine.property.Property;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -34,11 +36,12 @@ public class Browser {
     public void get(String uri) {
         getDriver().get(Property.getStringProperty("url") + uri);
     }
-
+    @Step("Сделан скриншот")
+    @Attachment("Скриншот браузера")
     public  byte[] takeScreenshot(){
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
-
+    @Step("Выполнен JavaScript")
     public  void executeJavaScript(String js, Object ... args){
         ((JavascriptExecutor) driver).executeScript(js,args);
     }

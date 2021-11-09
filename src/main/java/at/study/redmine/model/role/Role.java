@@ -4,6 +4,7 @@ import at.study.redmine.db.requests.RoleRequests;
 import at.study.redmine.model.Createable;
 import at.study.redmine.model.user.Entity;
 import at.study.redmine.utils.StringUtils;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public class Role extends Entity implements Createable<Role> {
     private Boolean allRolesManaged = true;
     private String settings = null;
 
-
+    @Step("Создана новая роль в БД")
     @Override
     public Role create() {
         new RoleRequests().create(this);

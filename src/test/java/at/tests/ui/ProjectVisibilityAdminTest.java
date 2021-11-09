@@ -2,6 +2,9 @@ package at.tests.ui;
 
 import at.study.redmine.model.project.Project;
 import at.study.redmine.model.user.User;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -17,6 +20,7 @@ public class ProjectVisibilityAdminTest extends BaseUITest {
 
     @BeforeMethod
     public void prepareFixture() {
+        Allure.step("Создал пользователя с правами Администратор");
         user = new User() {{
             setIsAdmin(true);
         }}.create();
@@ -27,29 +31,50 @@ public class ProjectVisibilityAdminTest extends BaseUITest {
         projectIdentifyer = project.getIdentifier();
 
         openBrowser();
-        headerPage.loginButton.click();
-        loginPage.login(user);
+        Allure.step("Нажата кнопка \"Войти\"", () -> {
+            headerPage.loginButton.click();
+        });
 
+        loginPage.login(user);
+        Allure.step("Проверка отображения элемента \"Домашняя страница\"");
         Assert.assertTrue(headerPage.homePage.isDisplayed());
 
-        headerPage.projects.click();
+        Allure.step("Кликнул по элементу \"Проекты\"", () -> {
+            headerPage.projects.click();
+        });
 
-        projectPage.addFilter.click();
-        projectPage.addFilter.findElement(By.xpath("//*[@value='is_public']")).click();
+        Allure.step("Кликнул по элементу \"Добавить фильтр\"", () -> {
+            projectPage.addFilter.click();
+        });
+        Allure.step("Выбрал фильтр \"Общедоступный\" в выпадающем списке", () -> {
+            projectPage.addFilter.findElement(
+                    By.xpath("//*[@value='is_public']")).click();
+        });
 
-        projectPage.isPublicFilter.click();  ////tr[@id='tr_is_public']//select[@id='values_is_public_1']
-        projectPage.isPublicFilter.findElement(By.xpath("//option[@value='0']")).click();
+        Allure.step("Кликнул по фильтру \"Общедоступный\"", () -> {
+            projectPage.isPublicFilter.click();
+        });
 
 
-        projectPage.filterSubmitButton.click();
+        Allure.step("Выбрал значение \"нет\" в выпадающем списке", () -> {
+            projectPage.isPublicFilter.findElement(By.xpath("//option[@value='0']")).click();
+        });
+
+
+        Allure.step("Нажал кнопку \"Применить\"", () -> {
+            projectPage.filterSubmitButton.click();
+        });
 
 
     }
 
-    @Test
+    @Test(description = "Проверка видимости проекта для Администратора")
+    @Step("Проверка, что приватный проект отображается для Администратора")
+    @Owner("Саляхов Алмаз Фанилович")
     public void projectVisibilityAdmin() {
 
-        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/" + projectIdentifyer + "']"));
+        projectElement = projectPage.projectsContent.findElement(By.xpath("//div[@id='content']//a[@href='/projects/"
+                + projectIdentifyer + "']"));
         Assert.assertTrue(projectElement.isDisplayed());
     }
 }

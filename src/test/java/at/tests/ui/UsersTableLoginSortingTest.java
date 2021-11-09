@@ -3,6 +3,10 @@ package at.tests.ui;
 import at.study.redmine.model.user.User;
 import at.study.redmine.ui.BrowserUtils;
 import at.study.redmine.utils.CompareUtils;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,29 +38,64 @@ public class UsersTableLoginSortingTest extends BaseUITest {
 
     }
 
-    @Test
+    @Test(description = "Администрирование. Сортировка списка пользователей по пользователю")
+    @Owner("Саляхов Алмаз Фанилович")
+    @Severity(SeverityLevel.NORMAL)
+
     public void UsersTableLoginSortTest() {
 
         openBrowser();
-        headerPage.loginButton.click();
+        Allure.step("Нажали кнопку \"Войти\"", () -> {
+                    headerPage.loginButton.click();
+                }
+        );
         loginPage.login(admin);
 
-        Assert.assertTrue(headerPage.homePage.isDisplayed());
+        Allure.step("Проверка отображения домашней страницы", () -> {
+                    Assert.assertTrue(headerPage.homePage.isDisplayed());
+                }
 
-        headerPage.administration.click();
-        Assert.assertTrue(administrationPage.content.isDisplayed());
+        );
+        Allure.step("Произведен клик по кнопке \"Администрирование\"", () -> {
+                    headerPage.administration.click();
+                }
 
-        administrationPage.users.click();
-        Assert.assertTrue(usersTablePage.button("Пользователь").isDisplayed());
-        Assert.assertTrue(usersTablePage.button("Создано").isDisplayed());
+        );
+        Allure.step("Проверка отображения страницы Администрирование", () -> {
+                    Assert.assertTrue(administrationPage.content.isDisplayed());
+                }
+
+        );
+        Allure.step("Клик по меню \"Пользователи\"", () -> {
+                    administrationPage.users.click();
+                }
+
+        );
+        Allure.step("Проверка отображения кнопок \"Пользователь\" и \"Создано\"", () -> {
+                    Assert.assertTrue(usersTablePage.button("Пользователь").isDisplayed());
+                    Assert.assertTrue(usersTablePage.button("Создано").isDisplayed());
+                }
+
+        );
 
         List<String> loginsBeforeClick = BrowserUtils.getElementsText(usersTablePage.login);
-        CompareUtils.assertEqualsListSortedByTextAsc(loginsBeforeClick);
+        Allure.step("Проверка, что изначально пользователи отсортированы по возрастанию", () -> {
+                    CompareUtils.assertEqualsListSortedByTextAsc(loginsBeforeClick);
+                }
 
-        usersTablePage.button("Пользователь").click();
+        );
+        Allure.step("Клик по кнопке \"Пользователь\"", () -> {
+                    usersTablePage.button("Пользователь").click();
+                }
+        );
+
+
         List<String> loginsTextAfterClick = BrowserUtils.getElementsText(usersTablePage.login);
-        CompareUtils.assertEqualsListSortedByTextDesc(loginsTextAfterClick);
+        Allure.step("Проверка, что пользователи отсортированы по убыванию", () -> {
+                    CompareUtils.assertEqualsListSortedByTextDesc(loginsTextAfterClick);
+                }
 
+        );
 
     }
 }

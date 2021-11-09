@@ -2,6 +2,7 @@ package at.study.redmine.ui.pages;
 
 import at.study.redmine.model.user.User;
 import at.study.redmine.ui.BrowserManager;
+import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.openqa.selenium.WebElement;
@@ -22,7 +23,7 @@ public class LoginPage extends Page {
     @FindBy(xpath = "//div[@id='flash_error']")
     public WebElement flashError;
 
-
+    @Step("Вход в систему пользователем с логином {0} и паролем {1}")
     public void login(String login, String password) {
         userNameInput.sendKeys(login);
         passwordInput.sendKeys(password);

@@ -6,6 +6,7 @@ import at.study.redmine.model.role.Role;
 import at.study.redmine.model.user.CreatableEntity;
 import at.study.redmine.model.user.User;
 import at.study.redmine.utils.StringUtils;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class Project extends CreatableEntity implements Createable<Project> {
     private Integer default_assigned_to_id = null;
 
     @Override
+    @Step("Создан новый проект в БД")
     public Project create() {
         new ProjectRequests().create(this);
         return this;

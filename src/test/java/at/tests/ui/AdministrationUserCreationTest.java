@@ -1,29 +1,22 @@
 package at.tests.ui;
 
-import at.study.redmine.db.connection.DatabaseConnection;
 import at.study.redmine.db.connection.PostgresConnection;
 import at.study.redmine.model.user.User;
-import at.study.redmine.property.Property;
 import at.study.redmine.utils.StringUtils;
 import lombok.SneakyThrows;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 public class AdministrationUserCreationTest extends BaseUITest {
-      User admin;
-      String randomLogin;
-      String randomFirstName;
-      String randomLastName;
-      String randomEmail;
+    User admin;
+    String randomLogin;
+    String randomFirstName;
+    String randomLastName;
+    String randomEmail;
 
     @BeforeMethod
     public void prepareFixture() {
@@ -34,7 +27,7 @@ public class AdministrationUserCreationTest extends BaseUITest {
         randomLogin = StringUtils.randomString("qazwsx", 5);
         randomFirstName = StringUtils.randomString("RFVBGTYHNMJU", 3);
         randomLastName = StringUtils.randomString("IKQALOP", 6);
-        randomEmail =  StringUtils.randomEmail();
+        randomEmail = StringUtils.randomEmail();
     }
 
     @SneakyThrows
@@ -64,22 +57,16 @@ public class AdministrationUserCreationTest extends BaseUITest {
 
         String query = "SELECT * FROM users WHERE login =?";
         List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
-                query,randomLogin);
+                query, randomLogin);
         String loginFromDb = result.get(0).get("login").toString();
         String firstnameFromDb = result.get(0).get("firstname").toString();
         String lastNameFromDb = result.get(0).get("lastname").toString();
-      //  String emailFromDb = result.get(0).get("email").toString();
+        //  String emailFromDb = result.get(0).get("email").toString();
 
-        Assert.assertEquals(randomLogin,loginFromDb);
-        Assert.assertEquals(randomFirstName,firstnameFromDb);
-        Assert.assertEquals(randomLastName,lastNameFromDb);
-      //  Assert.assertEquals(randomLogin,loginFromDb);
-
-
-
-
-
-
+        Assert.assertEquals(randomLogin, loginFromDb);
+        Assert.assertEquals(randomFirstName, firstnameFromDb);
+        Assert.assertEquals(randomLastName, lastNameFromDb);
+        //  Assert.assertEquals(randomLogin,loginFromDb);
 
 
     }

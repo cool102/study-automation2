@@ -1,5 +1,6 @@
 package at.study.redmine.ui.pages;
 
+import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.openqa.selenium.WebElement;

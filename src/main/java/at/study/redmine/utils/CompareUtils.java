@@ -1,5 +1,7 @@
 package at.study.redmine.utils;
 
+import at.study.redmine.allure.asserts.AllureAssert;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 
 import java.time.LocalDateTime;
@@ -22,33 +24,33 @@ public class CompareUtils {
     private static Comparator<String> TEXT_DECS_COMPARATOR = (l1, l2) -> l2.toLowerCase().compareTo(l1.toLowerCase());
     private static Comparator<String> TEXT_ASC_COMPARATOR = TEXT_DECS_COMPARATOR.reversed();
 
+    @Step("Провека сортировки списка дат по убыванию ")
     public static void assertListSortedByDateDesc(List<String> dates) {
 
         List<String> sortedDates = new ArrayList<>(dates);
         sortedDates.sort(DATE_DESC_COMPARATOR);
-        Assert.assertEquals(dates, sortedDates);
+        AllureAssert.assertEquals(dates, sortedDates, "Проверка, что списки совпадают");
 
     }
-
+    @Step("Провека сортировки текстовых списков (имен, фамилий, логинов и т.д.) по убыванию ")
     public static void assertEqualsListSortedByTextDesc(List<String> logins) {
         List<String> sortedLogins = new ArrayList<>(logins);
         sortedLogins.sort(TEXT_DECS_COMPARATOR);
-        Assert.assertEquals(logins, sortedLogins);
+        Assert.assertEquals(logins, sortedLogins, "Проверка, что текстовые списки одинаковы");
     }
+    @Step("Провека сортировки текстовых списков (имен, фамилий, логинов и т.д.) по возрастанию ")
     public static void assertEqualsListSortedByTextAsc(List<String> text) {
         List<String> sortedText = new ArrayList<>(text);
         sortedText.sort(TEXT_ASC_COMPARATOR);
-        Assert.assertEquals(text, sortedText);
+        AllureAssert.assertEquals(text, sortedText, "Проверка, что текстовые списки одинаковы");
     }
-
-    public static void assertFalseListSortedByTextAsc(List<String> text){
+    @Step("Проверка, что списки не совпадают")
+    public static void assertFalseListSortedByTextAsc(List<String> text) {
         List<String> sortedText = new ArrayList<>(text);
         sortedText.sort(TEXT_ASC_COMPARATOR);
-        Assert.assertFalse(text.equals(sortedText));
+        Assert.assertFalse(text.equals(sortedText), "Текстовые списки не совпадают");
 
     }
-
-
 
 
 }
