@@ -1,5 +1,6 @@
 package at.tests;
 
+import at.study.redmine.allure.asserts.AllureAssert;
 import at.study.redmine.api.client.RestApiClient;
 import at.study.redmine.api.client.RestMethod;
 import at.study.redmine.api.client.RestRequest;
@@ -11,6 +12,9 @@ import at.study.redmine.api.rest_assured.RestAssuredRequest;
 import at.study.redmine.model.user.Email;
 import at.study.redmine.model.user.Token;
 import at.study.redmine.model.user.User;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -39,7 +43,9 @@ public class TestCaseTwo {
         }}.create();
     }
 
-    @Test
+    @Owner("Саляхов Алмаз Фанилович")
+    @Severity(SeverityLevel.BLOCKER)
+    @Test(description = "Создание пользователя. Пользователь без прав администратора")
     public void noAdminUserCreateAnotherUserTest() {
         client = new RestAssuredClient(userOne);
 
@@ -59,7 +65,7 @@ public class TestCaseTwo {
 
 
         RestResponse response = client.execute(request);
-        Assert.assertEquals(response.getStatusCode(), 403);
+        AllureAssert.assertEquals(response.getStatusCode(), 403, "Проверка равенства кодов");
 
     }
 

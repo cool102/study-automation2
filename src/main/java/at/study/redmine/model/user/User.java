@@ -72,11 +72,13 @@ public class User extends CreatableEntity implements Createable<User> {
     public void addProject(Project project, List<Role> roles) {
         //TODO: реализовать с помощью SQL-запроса
     }
-
+@Step("Создан запрос в БД на получения пользователя с {0} ")
     public User read(Integer id) {
         return new UserRequests().read(id);
 
     }
-
-
+    @Step("Пользователю установлен пароль {0} ")
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

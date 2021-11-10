@@ -8,6 +8,10 @@ import at.study.redmine.api.rest_assured.RestAssuredClient;
 import at.study.redmine.api.rest_assured.RestAssuredRequest;
 import at.study.redmine.model.user.Token;
 import at.study.redmine.model.user.User;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -32,9 +36,12 @@ public class ApiGetUsersListTest {
 
     }
 
-    @Test
+    @Test (description = "Проверка получения списка пользователей по API запросу")
+    @Owner("Саляхов Алмаз Фанилович")
+    @Severity(SeverityLevel.MINOR)
     public void apiGetUsersListTest() {
         RestResponse response = client.execute(request);
+        Allure.step("Проверка получения кода 200");
         Assert.assertEquals(response.getStatusCode(), 200);
 
         UsersListDto responseData = response.getPayload(UsersListDto.class);

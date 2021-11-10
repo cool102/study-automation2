@@ -33,4 +33,8 @@ public class Email extends CreatableEntity implements Createable<Email> {
         new EmailRequests().create(this);
         return this;
     }
+    @Step("Пользователю установлен email {0}")
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
