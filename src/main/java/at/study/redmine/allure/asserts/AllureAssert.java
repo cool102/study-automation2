@@ -15,13 +15,18 @@ public class AllureAssert {
     public static void  assertEquals(Object actual, Object expected){
         Assert.assertEquals(actual,expected);
     }
-    @Step("Проверка неравенства на null")
+    @Step("Проверка, что не равен null")
     public static void  assertNotNull(Object actual,String message){
         Assert.assertNotNull(actual,message);
     }
 
-    @Step("Проверка равенства true")
+    @Step("Проверка получения true")
     public static void  assertTrue(Object actual,String message){
+        Assert.assertNotNull(actual,message);
+    }
+
+    @Step("Проверка получения false")
+    public static void  assertFalse(Object actual,String message){
         Assert.assertNotNull(actual,message);
     }
 }

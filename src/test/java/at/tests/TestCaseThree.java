@@ -1,5 +1,6 @@
 package at.tests;
 
+import at.study.redmine.allure.asserts.AllureAssert;
 import at.study.redmine.api.client.RestApiClient;
 import at.study.redmine.api.client.RestMethod;
 import at.study.redmine.api.client.RestRequest;
@@ -11,7 +12,7 @@ import at.study.redmine.api.rest_assured.RestAssuredRequest;
 import at.study.redmine.model.user.Email;
 import at.study.redmine.model.user.Token;
 import at.study.redmine.model.user.User;
-import org.testng.Assert;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,23 +22,25 @@ import java.util.Collections;
  * Получение пользователей. Пользователь без прав администратора
  */
 public class TestCaseThree {
-   private User userOne;
-   private User userTwo;
+    private User userOne;
+    private User userTwo;
 
     @BeforeMethod
     public void prepareFixtures() {
-
+        Allure.step("Создан пользователь 1");
         userOne = new User() {{
             setTokens(Collections.singletonList(new Token(this)));
             setEmails(Collections.singletonList(new Email(this)));
         }}.create();
-
+        Allure.step("Создан пользователь 2");
         userTwo = new User() {{
 
         }}.create();
     }
 
-    @Test
+    @Test(description = "Получение пользователей. Пользователь без прав администратора")
+    @Owner("Саляхов Алмаз Фанилович")
+    @Severity(SeverityLevel.MINOR)
     public void noAdminUserGetUserTest() {
         int idUserOne = userOne.getId();
         int idUserTwo = userTwo.getId();
@@ -64,27 +67,28 @@ public class TestCaseThree {
 
     }
 
+    @Step("Отправить запрос GET на получение пользователя 1, используя ключ API пользователя 1 ")
     private void test3point1(RestApiClient client, RestRequest request) {
         RestResponse response = client.execute(request);
 
-        Assert.assertEquals(response.getStatusCode(), 200);
+        AllureAssert.assertEquals(response.getStatusCode(), 200, "Проверка равенства кодов");
         UserInfoDto userInfoDto = response.getPayload(UserInfoDto.class);
         UserDto userDto = userInfoDto.getUser();
 
-        Assert.assertEquals(userDto.getLogin(), userOne.getLogin());
+        AllureAssert.assertEquals(userDto.getLogin(), userOne.getLogin(), "Проверка равенства логинов");
 
-        Assert.assertTrue(response.getPayLoad().contains("\"admin\":false"));
+        AllureAssert.assertTrue(response.getPayLoad().contains("\"admin\":false"), "Проверка равенства");
 
         String apiValue = userOne.getTokens().get(0).getValue();
-        Assert.assertTrue(response.getPayLoad().contains(apiValue));
+        AllureAssert.assertTrue(response.getPayLoad().contains(apiValue), "Проверка равенства");
     }
 
-
+    @Step(" Отправить запрос GET на получения пользователя 2, используя ключ API пользователя 1")
     private void test3point2(RestApiClient client, RestRequest requestTwo) {
         RestResponse response = client.execute(requestTwo);
-        Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertFalse(response.getPayLoad().contains("admin"));
-        Assert.assertFalse(response.getPayLoad().contains("api_key"));
+        AllureAssert.assertEquals(response.getStatusCode(), 200, "Проверка равенства кодов");
+        AllureAssert.assertFalse(response.getPayLoad().contains("admin"), "Проверка условия");
+        AllureAssert.assertFalse(response.getPayLoad().contains("api_key"), "Проверка условия");
 
 
     }
