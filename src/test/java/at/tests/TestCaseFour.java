@@ -1,5 +1,6 @@
 package at.tests;
 
+import at.study.redmine.allure.asserts.AllureAssert;
 import at.study.redmine.api.client.RestMethod;
 import at.study.redmine.api.client.RestResponse;
 import at.study.redmine.api.rest_assured.RestAssuredClient;
@@ -7,7 +8,7 @@ import at.study.redmine.api.rest_assured.RestAssuredRequest;
 import at.study.redmine.db.connection.PostgresConnection;
 import at.study.redmine.model.user.Token;
 import at.study.redmine.model.user.User;
-import org.testng.Assert;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,15 +26,17 @@ public class TestCaseFour {
 
     @BeforeMethod
     public void prepareFixtures() {
+        Allure.step("Создание пользователя 1");
         noAdminUser = new User() {{
             setTokens(Collections.singletonList(new Token(this)));
         }}.create();
-
+        Allure.step("Создание пользователя 2");
         user = new User().create();
     }
 
-
-    @Test
+    @Owner("Саляхов Алмаз Фанилович")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(description = "Удаление пользователей. Пользователь без прав администратора")
     public void noAdminUserDeleteAnotherUserTest() {
 
         int userId = user.getId();
@@ -50,30 +53,32 @@ public class TestCaseFour {
 
     }
 
+    @Step(" Отправить запрос DELETE на удаление пользователя 1,пользователем 1 (удаление себя)")
     private void test4point2(int noAdminUserId, String urlTwo, String query, RestAssuredClient client) {
         RestAssuredRequest requestTwo = new RestAssuredRequest(RestMethod.DELETE,
                 urlTwo, null, null, null);
 
         RestResponse responseTwo = client.execute(requestTwo);
 
-        Assert.assertEquals(responseTwo.getStatusCode(), 403);
+        AllureAssert.assertEquals(responseTwo.getStatusCode(), 403, "Проверка равенства кодов");
 
         List<Map<String, Object>> resultTwo = PostgresConnection.INSTANCE.executeQuery(
                 query, noAdminUserId);
-        Assert.assertFalse(resultTwo.isEmpty());
-        Assert.assertEquals(resultTwo.get(0).get("id"), noAdminUserId);
+        AllureAssert.assertFalse(resultTwo.isEmpty(), "Проверка условия");
+        AllureAssert.assertEquals(resultTwo.get(0).get("id"), noAdminUserId, "Проверка равенства id");
     }
 
+    @Step("Отправить запрос DELETE на удаление пользователя 2, пользователем 1 (удаление другого пользователя)")
     private void test4point1(int userId, String urlOne, String query, RestAssuredClient client) {
         RestAssuredRequest requestOne = new RestAssuredRequest(RestMethod.DELETE,
                 urlOne, null, null, null);
         RestResponse responseOne = client.execute(requestOne);
-        Assert.assertEquals(responseOne.getStatusCode(), 403);
+        AllureAssert.assertEquals(responseOne.getStatusCode(), 403, "Проверка равенства кодов");
 
         List<Map<String, Object>> result = PostgresConnection.INSTANCE.executeQuery(
                 query, userId);
-        Assert.assertFalse(result.isEmpty());
-        Assert.assertEquals(result.get(0).get("id"), userId);
+        AllureAssert.assertFalse(result.isEmpty(), "Проверка условия");
+        AllureAssert.assertEquals(result.get(0).get("id"), userId, "Проверка равенства id");
     }
 
 }
